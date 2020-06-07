@@ -1,0 +1,58 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet id="1" author="David Pulgarin">
+        <createTable tableName="people">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="typedocument" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="document" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lastname" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birthdate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="award_id" type="integer">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+        
+        <createTable tableName="awards">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="count" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="2" author="David Pulgarin">  
+	    <addForeignKeyConstraint  baseColumnNames="award_id"  
+	            baseTableName="people"  
+	            constraintName="fk_people_award_id"
+	            onDelete="CASCADE"  
+	            onUpdate="RESTRICT"  
+	            referencedColumnNames="id"  
+	            referencedTableName="awards"   
+	            validate="true"/>  
+	</changeSet>
+</databaseChangeLog>
