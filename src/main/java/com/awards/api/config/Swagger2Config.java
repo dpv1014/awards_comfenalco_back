@@ -31,7 +31,7 @@ public class Swagger2Config extends WebMvcConfigurationSupport {
 	
 	private ApiInfo apiInfo() {
 	     return new ApiInfo(
-	       "HulStore", 
+	       "Awards Comfenalco", 
 	       "REST API Spring Boot", 
 	       "API ", 
 	       "", 
